@@ -4,17 +4,40 @@ import './index.css';
 import Dados from "./componentes/previsão/Dados"
 import TamanhoFonte from "./componentes/fonte/TamanhoFonte"
 import * as serviceWorker from './serviceWorker';
+// import Conteudo from './componentes/comentarios/Conteudo'
 import Comentarios from './componentes/comentarios/Comentarios'
-import comentarios from "./dados/comentarios";
+import comentarios from './dados/comentarios'
 
 
 class App extends React.Component {
+    constructor (props) {
+        super (props);
+        this.state = {
+            visibilidade: false
+        }
+    }
+
+    mudarVisibilisade = e => {
+        e.preventDefault()
+        this.setState ((estadoanterior) => {
+            return ({
+                visibilidade: !estadoanterior.visibilidade
+            })
+        })
+    }
     render () {
         return (
             <div>
                 <Dados/>
                 <TamanhoFonte/>
-                <Comentarios/>
+                <button onClick={this.mudarVisibilisade} className="btnComentario">
+                {this.state.visibilidade ? 'Esconder comentários' : 'Mostrar comentários' }
+                </button>
+                {this.state.visibilidade && comentarios.map(() => {
+                    return (
+                        <Comentarios/>
+                        )
+                })}
             </div>
         )
     }

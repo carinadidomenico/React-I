@@ -1,19 +1,25 @@
 import React from 'react';
+import comentarios from '../../dados/comentarios';
+import Conteudo from './Conteudo'
 
-function Comentarios (props) {
-    return (
-        <div className="comentario">
-
-            <img className="comentario__perfil" src={props.img} alt={props.description}/>
-    
-        <div>
-            <h3 className="comentario__nome">{props.nome}</h3>
-            <h4 className="comentario__subtitulo">{props.subtitulo}</h4>
-            <hr className="comentario__hr"/>
-            <p>{props.comentario}</p>
+class Comentarios extends React.Component {
+    render () {
+      return (
+        <div className="comentario__container">
+          {comentarios.map( (item) => {
+            return (
+              <Conteudo
+                  nome={item.nome}
+                  img={item.img}
+                  descricao={item.descricao}
+                  subtitulo={item.subtitulo}
+                  comentario={item.comentario}
+              />
+            )
+          })}
         </div>
-        </div>
-    )
-}
+      )
+    }
+  }
 
 export default Comentarios
